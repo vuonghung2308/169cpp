@@ -2,36 +2,25 @@
 #include <vector>
 using namespace std;
 
-void nhap(vector<int> &a, int &k);
 void lietke(vector<int> a, int k);
-int max(vector<int> a, int k);
 
 int main() {
 	int t; cin >> t;
 	for(int i = 1; i <= t; i++) {
-		vector<int> a; int k; nhap(a, k);
-		lietke(a, k);
-		cout << endl;
-	}	
-}
-void nhap(vector<int> &a, int &k) {
-	int n;
-	cin >> n >> k;
-	for(int i = 0; i < n; i++) {
-		int t; cin >> t;
-		a.push_back(t);		
+		int n, k; cin >> n >> k;
+		vector<int> a(n, 0);
+		for(int j = 0; j < n; j++)
+			cin >> a[j];
+		lietke(a, k); cout << endl;
 	}
+	
 }
 void lietke(vector<int> a, int k) {
-	while(a.size() >= k) {
-		cout << max(a, k) << ' ';
-		a.erase(a.begin());
+	for(int i = 0; i <= a.size() - k; i++) {
+		int max = a[i];
+		for(int j = i; j < i + k; j++)
+			if(max < a[j])
+				max = a[j];
+		cout << max << ' ';
 	}
-}
-int max(vector<int> a, int k) {
-	int m = a[0];
-	for(int i = 1; i < k; i++)
-		if(m < a[i])
-			m = a[i];
-	return m;
 }
