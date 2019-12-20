@@ -1,25 +1,23 @@
 #include <iostream>
-#include <fstream>
 #include <vector>
+using namespace std;
 
 void xoay(std::vector<int> &a, int n);
 void hienthi(std::vector<int> a);
 
 int main() {
-    std::vector<int> a;
-    short t; int n, na;
-    std::fstream input("ex47.in", std::ios::in);
-    input >> t;
+    int t; cin >> t;
     for(int i = 1; i <= t; i++) {
-        input >> na >> n;
+    	std::vector<int> a;
+		int n, na;
+        cin >> na >> n;
         for(int i = 0; i < na; i++) {
             int x;
-            input >> x;
+            cin >> x;
             a.push_back(x);
         }
         xoay(a, n);
         hienthi(a);
-        a.clear();
     }
 }
 void xoay(std::vector<int> &a, int n) {

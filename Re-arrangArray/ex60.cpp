@@ -1,52 +1,52 @@
 #include <iostream>
 #include <string>
-#include <vector>
 using namespace std;
 
-string chuyendoi(string c);
-
-int main() {
-	int t; cin >> t;
-	for(int i = 1; i <= t; i++) {
-		string c; cin >> c;
-		cout << chuyendoi(c) << endl;
-	}
-}
-string chuyendoi(string c) {
+string tim(string a) {
+	if(a.length() > 9)
+		return "-1";
 	string res;
-	vector<bool> check(10, true);
-	int i = 0, begin = 1;
-	if(c[0] == 'I') {
-		res.push_back('1');
-		check[1] = false;
-	}
-	else {
-		while(c[i] == 'D' && c[i] != '\0') {
-			begin++; i++;
-		}
-		for(int j = begin; j >= 1; j--) {
-			res.push_back('0'+ j);
-			check[j] = false;
+	int n = a.size(), temp = 1;
+	if(a[0] == 'D') {
+		int i = 0;
+		while(a[i] == 'D') {
+			temp++;
+			i++;
 		}
 	}
-	for(; i < c.size(); i++) {
-		if(c[i] == 'D') 
-			begin = begin - 1;
-		else if(c[i] == 'I' && c[i+1] == 'D') {
-			int t = i;
-			while(c[t+1] == 'D')
-				t++;
-			t = t - i;
-			begin = begin + t + 1;
-			
+	int max = temp;
+	res.push_back('0' + temp);
+	for(int i = 0; i < n; i++) {
+		if(a[i] == 'D') {
+			temp = temp - 1;
+			res.push_back('0' + temp);
+		}
+		else if(a[i+1] == 'I' || a[i+1] == '\0') {
+			max = max + 1;
+			res.push_back('0' + max);
 		}
 		else {
-			begin = begin + 1;
-			while(check[begin] == false && begin <= 9)
-				begin = begin + 1;
+			int j = i + 1;
+			max = max + 1;
+			while(a[j] == 'D') {
+				j = j + 1;
+				max = max + 1;
+			}
+			res.push_back('0' + max);
+			temp = max;
 		}
-		res.push_back('0'+begin);
-		check[begin] = false;
 	}
 	return res;
 }
+
+int main()  
+{ 
+    int t; cin >> t;
+  
+    for (int i = 0; i < t; i++) 
+    {
+    	string input; cin >> input;
+        cout << tim(input) << "\n"; 
+    } 
+    return 0;  
+} 
