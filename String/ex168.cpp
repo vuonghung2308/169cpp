@@ -1,35 +1,30 @@
 #include <iostream>
+#include <vector>
 #include <string>
 using namespace std;
 
-void dao_chuoi(string &my_string);
+void hienthi(string mystring) {
+	vector<string> worlds;
+	int i = 0, n = mystring.size();
+	while(i < n) {
+		while(i < n && mystring[i] == ' ')
+			i++;
+		string temp;
+		while(i < n && (mystring[i] != ' ' && mystring[i] != '\0'))
+			temp.push_back(mystring[i++]);
+		worlds.push_back(temp);
+	}
+	for(int i = 0; i < worlds.size()-1; i++)
+		cout << worlds[i] << ' ';
+	cout << worlds[worlds.size()-1] << endl;
+}
 
 int main() {
-	int t;
-	cin >> t;
+	int t; cin >> t;
 	for(int i = 1; i <= t; i++) {
+		string mystring;
 		fflush(stdin);
-		string my_string;
-		getline(cin, my_string);
-		dao_chuoi(my_string);
-		cout << my_string << endl;
-	}	
-}
-void dao_chuoi(string &my_string) {
-	string res;
-	string temp;
-	int i = 0;
-	while(i < my_string.size()) {
-		while (my_string[i] != ' ' && i < my_string.size()) {
-			temp.push_back(my_string[i]);
-			i++;
-		}
-		res.insert(res.begin(), temp.begin(), temp.end());
-		if(my_string[i]== ' ')
-			res.insert(res.begin(), ' ');
-		temp.clear();
-		i++;
+		getline(cin, mystring);
+		hienthi(mystring);
 	}
-	my_string.clear();
-	my_string =  res;
 }

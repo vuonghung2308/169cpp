@@ -1,5 +1,5 @@
 #include <iostream>
-#include <fstream>
+using namespace std;
 #include <cmath>
 
 bool sont(int x);
@@ -7,11 +7,10 @@ int sontmin(int x);
 void lietke(int x);
 
 int main() {
-    std::fstream input("ex11.in", std::ios::in);
     int n, x;
-    input >> n;
+    cin >> n;
     for(int i = 0; i < n; i++) {
-        input >> x;
+        cin >> x;
         lietke(x);
     }
 }

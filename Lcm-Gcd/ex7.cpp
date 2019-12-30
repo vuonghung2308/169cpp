@@ -1,5 +1,5 @@
 #include <iostream>
-#include <fstream>
+using namespace std;
 
 long long find(int X, int Y, int Z, short N);
 int gcd(int a, int b);
@@ -7,12 +7,11 @@ long long lcm(int a, int b);
 long long pow(short x);
 
 int main() {
-    std::fstream input("ex7.in", std::ios::in);
     short n, N;
     int X, Y, Z;
-    input >> n;
+    cin >> n;
     for(int i = 0; i < n; i++) {
-        input >> X >> Y >> Z >> N;
+        cin >> X >> Y >> Z >> N;
         std::cout << find(X, Y, Z, N) << std::endl;
     }
 }

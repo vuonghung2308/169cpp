@@ -1,17 +1,15 @@
 #include <iostream>
 #include <cmath>
-#include <fstream>
-
+using namespace std;
 bool sont(int x);
 int dem(int n);
 
 int main() {
-    std::fstream input("ex23.in", std::ios::in);
     int t;
     long long n;
-    input >> t;
+    cin >> t;
     for(int i = 1; i <= t; i++) {
-        input >> n;
+        cin >> n;
         int x = sqrt(n);
         std::cout << dem(x) << std::endl;
     }

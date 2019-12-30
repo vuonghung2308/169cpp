@@ -1,8 +1,8 @@
 #include <iostream>
-#include <fstream>
 #include <vector>
+using namespace std;
 
-void docfile(std::vector<int> &a, long long &b, long long &M, std::fstream &input);
+void docfile(std::vector<int> &a, long long &b, long long &M);
 long long tinh(std::vector<int> a, long long b, long long M);
 long long mod(std::vector<int> a, long long M);
 long long abmodM(long long a, long long b, long long M);
@@ -10,22 +10,21 @@ long long abmodM(long long a, long long b, long long M);
 int main() {
     short t; long long b, M;
     std::vector<int> a;
-    std::fstream input("ex31.in", std::ios::in);
-    input >> t;
+    cin >> t;
     for(int i = 1; i <= t; i++) {
-        docfile(a, b, M, input);
+        docfile(a, b, M);
         std::cout << tinh(a, b, M) << std::endl;
         a.clear();
     }
 }
-void docfile(std::vector<int> &a, long long &b, long long &M, std::fstream &input) {
+void docfile(std::vector<int> &a, long long &b, long long &M) {
     char c[1001] = {}; int i = 0;
-    input >> c;
+    cin >> c;
     while(c[i] != '\0') {
         a.insert(a.begin()+i, c[i] - '0');
         i++;
     }
-    input >> b >> M;
+    cin >> b >> M;
 }
 long long tinh(std::vector<int> a, long long b, long long M) {
     long long A = mod(a, M);

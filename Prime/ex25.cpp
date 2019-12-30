@@ -1,17 +1,16 @@
 #include <iostream>
 #include <cmath>
-#include <fstream>
+using namespace std;
 
 int dem(int l, int r, int a, int b);
 int ucln(int a, int b);
 int bcnn(int a, int b);
 
 int main() {
-    std::fstream input("ex25.in", std::ios::in);
     int t, x, y, a, b;
-    input >> t;
+    cin >> t;
     for(int i = 1; i <= t; i++) {
-        input >> x >> y >> a >> b;
+        cin >> x >> y >> a >> b;
         std::cout << dem(x, y, a, b) << std::endl; 
     }
 }

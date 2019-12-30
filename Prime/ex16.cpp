@@ -1,14 +1,13 @@
 #include <iostream>
-#include <fstream>
+using namespace std;
 
 void lietke(int x);
 
 int main() {
     int t, x;
-    std::fstream input("ex16.in", std::ios::in);
-    input >> t;
+    cin >> t;
     for(int i = 1; i <= t; i++) {
-        input >> x;
+        cin >> x;
         lietke(x);
     } 
 }
