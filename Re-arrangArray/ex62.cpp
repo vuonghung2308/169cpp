@@ -1,50 +1,38 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
-int tich_max(vector<int> x);
-
+int findSub(int *a, int n) {
+	int max_end_here = 1,
+		min_end_here = 1,
+		max_so_far = 1,
+		flag = 0;
+	
+	for(int i = 0; i < n; i++) {
+		if(a[i] > 0) {
+			max_end_here *= a[i];
+			min_end_here = (1 < a[i]*min_end_here)? 1: a[i]*min_end_here;
+			flag = 1;
+		}
+		else if(a[i] == 0)
+			max_end_here = 1, min_end_here = 1;
+		else {
+			int temp = max_end_here;
+			max_end_here = (min_end_here < 0)? min_end_here*a[i]: 1;
+			min_end_here = temp * a[i];
+		}
+		max_so_far = (max_end_here > max_so_far)? max_end_here: max_so_far;			
+	}
+	if(max_so_far == 1 && flag == 0)
+		return 0;
+	return max_so_far;
+}
 int main() {
 	int t; cin >> t;
 	for(int i = 1; i <= t; i++) {
-		int n; cin >> n;
-		vector<int> x(n, 0);
-		for(int i = 0; i < n; i++)
-			cin >> x[i];
-		cout << tich_max(x) << endl;
+		int n, *a; cin >> n;
+		a = new int[n];
+		for(int j = 0; j < n; j++)
+			cin >> a[j];
+		cout << findSub(a, n) << endl;
 	}
-}
-int tich_max(vector<int> x) {
-	vector<int> max;
-	int i = 0;
-	
-	
-	while(i < x.size()) {
-		bool check = false;
-		int temp = 1, temp1 = 1;
-		while(i < x.size() && x[i] != 0) {
-			if(x[i] == -1) {
-				max.push_back(temp);
-				max.push_back(temp * (-1));
-				check = true;
-			}
-			if(check)
-				temp1 = temp1 * x[i];
-			temp = temp * x[i];
-			i++;
-		}
-		max.push_back(temp);
-		if(check) {
-			max.push_back(temp1);
-			max.push_back(temp1 * (-1));
-		}
-		temp = 1;
-		i++;
-	}
-	
-	int temp = max[0];
-	for(int i = 1; i < max.size(); i++)
-		if(temp < max[i])
-			temp = max[i];
-	return temp;
 }

@@ -16,9 +16,14 @@ int main() {
 }
 
 int dem(int l, int r, int a, int b) {
-    int na = r / a - l / a;
-    int nb = r / b - l / b;
-    int nab = r /bcnn(a, b) - l / bcnn(a, b);
+    int na = r / a;
+    int na_ = (l-1) / a;
+    na = na - na_;
+    int nb = r / b;
+    int nb_ = (l-1) / b;
+    nb = nb - nb_;
+    int nab = r /bcnn(a, b);
+    int nab_ = (l-1) / bcnn(a, b);
     return na + nb - nab;
 }
 int ucln(int a, int b) {

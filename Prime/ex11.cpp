@@ -15,26 +15,13 @@ int main() {
     }
 }
 
-bool sont(int x) {
-    if(x < 2)
-        return false;
-    for(int i = 2; i <= sqrt(x); i++)
-        if(x%i == 0)
-            return false;
-    return true;
-}
 int sontmin(int x) {
     if(x == 1)
         return 1;
-    if(sont(x) == true)
-        return x;
-    for(int i = 2; i <= sqrt(x); i++) {
-        if(x%i == 0) {
+    for(int i = 2; i <= sqrt(x); i++)
+        if(x%i == 0)
             return i;
-            break;
-        }
-    }
-    return -1;
+    return x;
 }
 void lietke(int x) {
     for(int i = 1; i <= x; i++)
