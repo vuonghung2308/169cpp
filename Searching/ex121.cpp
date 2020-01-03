@@ -1,51 +1,57 @@
 #include <iostream>
 using namespace std;
 
-int binarySearchU(int *a, int x, int r, int l) {
-	while(l <= r) {
-		int mid = (r+l) / 2;
-		if(a[mid] == x)
-			return mid;
-		else if(a[mid] > x)
-			r = mid - 1;
-		else l = mid + 1;
-	}
-	return -1;
-}
-int binarySearchD(int *a, int x, int r, int l) {
-	while(l <= r) {
-		int mid = (r+l) / 2;
-		if(a[mid] == x)
-			return mid;
-		else if(a[mid] > x)
-			l = mid + 1;
-		else r = mid - 1;
-	}
-	return -1;
-}
-
-int findB(int *a, int n, int x) {
-	int i = 0;
-	while(a[i] < a[i+1] && i < n)
-		i++;
-	if(a[i] < x)
+int binarySearch(int *a, int low, int high, int key, int direction) {
+	if(high < low)
 		return -1;
-	int res = binarySearchU(a, x, i, 0);
-	if(res != -1)
-		return res;
-	res = binarySearchD(a, x, n-1, i);
-	if(res != -1)
-		return res;
-	return -1;	
+	int mid = (high + low) /2;
+	if(a[mid] == key)
+		return mid;
+	if(direction == 1) {
+		if(a[mid] < key)
+			return binarySearch(a, mid+1, high, key, 1);
+		return binarySearch(a, low, mid-1, key, 1);
+	}
+	else {
+		if(a[mid] > key)
+			return binarySearch(a, mid+1, high, key, -1);
+		return binarySearch(a, low, mid-1, key, -1);
+	}
+}
+int findPoint(int *a, int low, int high) {
+	if(low > high)
+		return -1;
+	if(low == high)
+		return low;
+	int mid = (low+high)/2;
+	if(a[mid] > a[mid+1])
+		return mid;
+	if(a[mid] < a[mid-1])
+		return mid-1;
+	if(a[mid] < a[mid+1])
+		return findPoint(a, mid+1, high);
+	return findPoint(a, low, mid-1);
+}
+int findKey(int *a, int n, int key) {
+	int point = findPoint(a, 0, n-1);
+	if(point == -1 && a[0] < a[1])
+		return binarySearch(a, 0, n, key, 1);
+	else if(point == -1) return binarySearch(a, 0, n-1, key, -1);
+	if(a[point] == key)
+		return point;
+	int x = binarySearch(a, 0, point-1, key, 1);
+	if(x == -1)
+		return binarySearch(a, point+1, n-1, key, -1);
+	return x;	
 }
 
 int main() {
 	int t; cin >> t;
 	for(int i = 0; i < t; i++) {
-		int n, x, *a; cin >> n >> x;
+		int *a, n, key; cin >> n >> key;
 		a = new int[n];
-		for(int i = 0; i < n; i++)
-			cin >> a[i];
-		cout << findB(a, n, x) << endl;
+		for(int j = 0; j < n; j++)
+			cin >> a[j];
+		cout << findKey(a, n, key) << endl;
 	}
 }
