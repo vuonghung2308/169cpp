@@ -1,39 +1,24 @@
 #include <iostream>
-#include <fstream>
+#include <cmath>;
+using namespace std;
 
 bool check(long long n);
-long long fibonacci(int n);
+bool isPerfectSquare(long long n);
 
 int main() {
     short t; long long n;
-    std::fstream input("ex42.in", std::ios::in);
-    input >> t;
+    cin >> t;
     for(int i = 1; i <= t; i++) {
-        input >> n;
+        cin >> n;
         if(check(n)) 
             std::cout << "YES" << std::endl;
         else std::cout << "NO " << std::endl;
     }
 }
 bool check(long long n) {
-    int i = 0;
-    while(fibonacci(i) <= n) {
-        if(fibonacci(i) == n)
-            return true;
-        i++;
-    }
-    return false;
+    return isPerfectSquare(5*n*n+4) || isPerfectSquare(5*n*n-4);
 }
-long long fibonacci(int n) {
-    long long f0 = 0, f1 = 1;
-    if(n == 0)
-        return f0;
-    if(n == 1)
-        return f1;
-    for(int i = 1; i <= n; i++) {
-        long long t = f0;
-        f0 = f1;
-        f1 = f1 + t;
-    }
-    return f1;
+bool isPerfectSquare(long long n) {
+	long long x = (long long) sqrt(n);
+	return (x*x == n);
 }

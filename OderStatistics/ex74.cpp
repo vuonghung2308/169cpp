@@ -16,11 +16,10 @@ int main() {
 	
 }
 void lietke(vector<int> a, int k) {
-	for(int i = 0; i <= a.size() - k; i++) {
-		int max = a[i];
-		for(int j = i; j < i + k; j++)
-			if(max < a[j])
-				max = a[j];
-		cout << max << ' ';
-	}
+	int res[a.size()];
+	res[0] = a[0];
+	for(int i = 1; i < a.size(); i++)
+		res[i] = (res[i-1] < a[i])? a[i]: res[i-1];
+	for(int i = k-1; i < a.size(); i++)
+		cout << res[i] << ' ';
 }

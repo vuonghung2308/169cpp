@@ -1,16 +1,14 @@
 #include <iostream>
-#include <fstream>
 #include <cmath>
 
 bool sont(int x);
 void ketqua(int x);
 
 int main() {
-    std::fstream input("ex13.in", std::ios::in);
     int n, x;
-    input >> n;
+    std::cin >> n;
     for(int i = 0; i < n; i++) {
-        input >> x;
+        std::cin >> x;
         ketqua(x);
     }
 }
@@ -25,7 +23,7 @@ bool sont(int x) {
 }
 void ketqua(int x) {
     int i, j = x, a = 0, b = 0;
-    for(i = 2; i <= x; i++) {
+    for(i = 2; i+i <= x; i++) {
         if(sont(i) && sont(x-i)) {
             a = i; b = x - i;
             break;

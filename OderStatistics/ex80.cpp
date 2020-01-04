@@ -4,27 +4,25 @@ using namespace std;
 int findMax(int *arr1, int *arr2, int n, int m) {
 	int sum1 = 0, sum2 = 0, result = 0;
 	int i = 0, j = 0;
-	
 	while(i < n && j < m) {
 		if(arr1[i] < arr2[j])
 			sum1 += arr1[i++];
 		else if(arr2[j] < arr1[i])
 			sum2 += arr2[j++];
 		else {
-			result = (sum1 > sum2)?sum1:sum2;
-			while(arr1[i] == arr2[j] && i < n && j < m) {
-				result += arr1[i++];
+			result = (sum1 > sum2)? sum1: sum2;
+			while(arr1[i] == arr2[j]) {
+				result+= arr1[i++];
 				j++;
 			}
-			sum1 = 0;
-			sum2 = 0;
+			sum1 = 0, sum2 = 0;
 		}
 	}
 	while(i < n)
-		sum1 += arr1[i++];
+		sum1 +=arr1[i++];
 	while(j < m)
 		sum2 += arr2[j++];
-	result += (sum1 > sum2)?sum1:sum2;
+	result += (sum1 > sum2)? sum1: sum2;
 	return result;
 }
 

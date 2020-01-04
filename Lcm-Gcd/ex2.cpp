@@ -1,16 +1,14 @@
 #include <iostream>
-#include <fstream>
 
 long long gcd(long long a, long long b);
 long long lcm(long long a, long long b);
 
 int main() {
-    std::fstream input("ex2.in", std::ios::in);
     long long n, a;
     long long x = 1;
-    input >> n;
+    std::cin >> n;
     for(long long i = 0; i < n; i++) {
-        input >> a;
+        std::cin >> a;
         for(long long j = 1; j <= a; j++)
             x = lcm(x, j);
         std::cout << x << std::endl;

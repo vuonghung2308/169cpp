@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 #include <algorithm>
 #include <vector>
 
@@ -8,13 +7,12 @@ void sapxep(std::vector<int> a);
 int main() {
     short t; int n;
     std::vector<int> a;
-    std::fstream input("ex55.in", std::ios::in);
-    input >> t;
+    std::cin >> t;
     for(short i = 1; i <= t; i++) {
-        input >> n;
+        std::cin >> n;
         for(int j = 0; j < n; j++) {
             int temp;
-            input >> temp;
+            std::cin >> temp;
             a.push_back(temp);
         }
         sapxep(a);
@@ -22,12 +20,12 @@ int main() {
     }
 }
 void sapxep(std::vector<int> a) {
-    std::vector<int> x;
+    sort(a.begin(), a.begin()+a.size());
     while(!a.empty()) {
-            std::cout << *std::max_element(a.begin(), a.end()) << ' ';
-            a.erase(std::max_element(a.begin(), a.end()));
-            std::cout << *std::min_element(a.begin(), a.end()) << ' ';
-            a.erase(std::min_element(a.begin(), a.end()));
+            std::cout << a.back() << ' ';
+            a.erase(a.end()-1);
+            std::cout << a.front() << ' ';
+            a.erase(a.begin());
     }
     std::cout << std::endl;
 }
